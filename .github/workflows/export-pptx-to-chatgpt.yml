@@ -1,0 +1,20 @@
+name: Export presentation for ChatGPT Library
+on:
+  push:
+    paths:
+      - '.github/workflows/export-pptx-to-chatgpt.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload PPTX as short-lived artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sid-seminar-pptx
+          path: slides/SID Seiminar 20261030.pptx
+          if-no-files-found: error
+          retention-days: 1
